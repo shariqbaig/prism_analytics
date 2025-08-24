@@ -145,7 +145,7 @@ export const RechartsRenderer: React.FC<RechartsRendererProps> = ({
               fill={colors[0]}
               dataKey="value"
               nameKey="name"
-              label={({ name, percent }) => `${name} (${(percent * 100).toFixed(1)}%)`}
+              label={({ name, percent }) => `${name} (${((percent ?? 0) * 100).toFixed(1)}%)`}
               labelLine={false}
             >
               {data.map((_, index) => (

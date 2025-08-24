@@ -19,7 +19,7 @@ export interface RechartData {
 
 export interface ChartConfig {
   title: string;
-  type: 'bar' | 'line' | 'pie' | 'area';
+  type: 'bar' | 'line' | 'pie' | 'area' | 'doughnut';
   library: ChartLibrary;
   responsive?: boolean;
   height?: number;

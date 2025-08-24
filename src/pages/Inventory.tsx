@@ -6,14 +6,6 @@ import { DashboardCard } from '@/components/dashboard';
 const Inventory: React.FC = () => {
   const { metrics, loading, error } = useInventoryMetrics();
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value);
-  };
 
   return (
     <div className="p-6 space-y-6 max-w-7xl">

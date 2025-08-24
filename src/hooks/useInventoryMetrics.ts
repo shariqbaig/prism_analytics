@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useDataStorage } from './useDataStorage';
 import type { InventoryMetrics } from '@/services/businessCalculations';
 import { InventoryCalculator } from '@/services/businessCalculations';

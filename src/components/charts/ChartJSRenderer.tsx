@@ -13,7 +13,7 @@ import {
   type ChartOptions,
   type ChartData as ChartJSData
 } from 'chart.js';
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
 import type { ChartData, ChartConfig } from './types';
 
 // Register Chart.js components (tree-shaking)
@@ -93,13 +93,15 @@ export const ChartJSRenderer: React.FC<ChartJSRendererProps> = ({
 
   switch (config.type) {
     case 'bar':
-      return <Bar data={chartData as any} options={options} width={config.width || 100} height={height} />;
+      return <Bar data={chartData as any} options={options as any} width={config.width || 100} height={height} />;
     case 'line':
-      return <Line data={chartData as any} options={options} width={config.width || 100} height={height} />;
+      return <Line data={chartData as any} options={options as any} width={config.width || 100} height={height} />;
     case 'pie':
-      return <Pie data={chartData as any} options={options} width={config.width || 100} height={height} />;
+      return <Pie data={chartData as any} options={options as any} width={config.width || 100} height={height} />;
+    case 'doughnut':
+      return <Doughnut data={chartData as any} options={options as any} width={config.width || 100} height={height} />;
     default:
-      return <Bar data={chartData as any} options={options} width={config.width || 100} height={height} />;
+      return <Bar data={chartData as any} options={options as any} width={config.width || 100} height={height} />;
   }
 };
 

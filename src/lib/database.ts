@@ -117,7 +117,7 @@ export class PrismDatabase extends Dexie {
 
       // Save sheets
       for (const sheet of data.sheets) {
-        const sheetId = await this.processedSheets.add({
+        await this.processedSheets.add({
           fileRecordId,
           name: sheet.name,
           type: sheet.type,
@@ -134,7 +134,7 @@ export class PrismDatabase extends Dexie {
       const totalRows = data.sheets.reduce((sum, sheet) => sum + sheet.rowCount, 0);
       const totalColumns = data.sheets.reduce((max, sheet) => Math.max(max, sheet.columnCount), 0);
       
-      const statsId = await this.processingStats.add({
+      await this.processingStats.add({
         fileRecordId,
         totalRows,
         totalColumns,
@@ -145,7 +145,7 @@ export class PrismDatabase extends Dexie {
       });
 
       // Create initial data version
-      const versionId = await this.dataVersions.add({
+      await this.dataVersions.add({
         fileMetadataId: metadataId,
         version: 1,
         createdAt: new Date().toISOString(),
@@ -180,7 +180,7 @@ export class PrismDatabase extends Dexie {
       const allFiles = await this.fileMetadata.toArray();
       console.log('[DATABASE] All files in database:', allFiles);
       
-      const query = this.fileMetadata.where('isActive').equals(true);
+      const query = this.fileMetadata.where('isActive').equals(1);
       
       if (fileType) {
         const result = await query.and(file => file.fileType === fileType).first();
@@ -295,28 +295,29 @@ export class PrismDatabase extends Dexie {
   }
 
   async getDataVersions(fileId: number): Promise<DataVersion[]> {
-    return this.dataVersions
+    const versions = await this.dataVersions
       .where('fileMetadataId')
       .equals(fileId)
-      .orderBy('version')
-      .reverse()
       .toArray();
+    
+    // Sort by version in descending order
+    return versions.sort((a, b) => b.version - a.version);
   }
 
   // User Preferences
-  async setPreference(key: string, value: string | number | boolean | object): Promise<void> {
+  async setPreference(key: string, value: string | number | boolean | Record<string, unknown>): Promise<void> {
     const existing = await this.userPreferences.where('key').equals(key).first();
     
     if (existing?.id) {
       await this.userPreferences.update(existing.id, { 
-        value, 
+        value: value as any, 
         updatedAt: new Date(),
         version: (existing.version || 1) + 1
       });
     } else {
       await this.userPreferences.add({
         key,
-        value,
+        value: value as (string | number | boolean | Record<string, unknown>),
         updatedAt: new Date(),
         version: 1
       });
@@ -473,7 +474,7 @@ export class PrismDatabase extends Dexie {
       totalSheets: sheets.length,
       totalDataRows,
       totalStorageSize,
-      lastActivity: appState?.lastActiveAt || null
+      lastActivity: appState?.lastActiveAt ? new Date(appState.lastActiveAt) : null
     };
   }
 }

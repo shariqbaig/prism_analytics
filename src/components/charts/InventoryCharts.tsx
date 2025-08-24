@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { AdaptiveChart } from './AdaptiveChart';
-import type { ChartConfig, ChartData, RechartData } from './types';
+import type { ChartConfig, RechartData } from './types';
 import type { InventoryMetrics } from '@/services/businessCalculations';
 
 interface InventoryChartsProps {
@@ -87,7 +87,7 @@ export const GeographicDistributionChart: React.FC<{
     const regions = ['North', 'South', 'East', 'West', 'Central'];
     const baseValue = 100 / regions.length;
     
-    return regions.slice(0, data.regionCount).map((region, index) => ({
+    return regions.slice(0, data.regionCount).map((region) => ({
       name: region,
       value: baseValue + (Math.random() - 0.5) * 20, // Add some variance
       risk: data.riskSpread === 'concentrated' ? 'high' : 'medium'

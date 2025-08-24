@@ -5,10 +5,10 @@ import { useOSRMetrics } from '@/hooks/useOSRMetrics';
 import { DashboardCard, KPICard, QuickActions } from '@/components/dashboard';
 import { PortfolioConcentrationChart } from '@/components/charts/InventoryCharts';
 import { HealthScoreChart } from '@/components/charts/OSRCharts';
-import { Package, AlertTriangle, TrendingUp, Upload, Eye, FileText, Download } from 'lucide-react';
+import { Package, AlertTriangle, TrendingUp, Upload, FileText } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
-  const { state } = useDataStorage();
+  const { } = useDataStorage();
   const { metrics: inventoryMetrics, loading: inventoryLoading } = useInventoryMetrics();
   const { metrics: osrMetrics, loading: osrLoading } = useOSRMetrics();
 
