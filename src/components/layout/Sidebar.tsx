@@ -6,9 +6,7 @@ import {
   Package, 
   AlertTriangle, 
   FileText,
-  Eye,
-  ChevronLeft,
-  ChevronRight
+  Eye
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

@@ -93,7 +93,7 @@ export const useChartData = (options: UseChartDataOptions): UseChartDataReturn =
 
     try {
       // This is a simplified transformation - would be enhanced based on actual data structure
-      const sampleData = generateSampleRechartsData(options.chartType);
+      const sampleData = generateSampleRechartsData();
       return sampleData;
     } catch (err) {
       setError('Failed to transform data for Recharts');
@@ -124,13 +124,13 @@ function generateSampleChartJSData(chartType: string): ChartData {
   ];
 
   if (chartType === 'line') {
-    datasets[0].backgroundColor = '#3B82F6';
+    datasets[0].backgroundColor = ['#3B82F6'];
   }
 
   return { labels, datasets };
 }
 
-function generateSampleRechartsData(chartType: string): RechartData[] {
+function generateSampleRechartsData(): RechartData[] {
   return [
     { name: 'Q1', value: 12000, category: 'Inventory' },
     { name: 'Q2', value: 15000, category: 'Inventory' },

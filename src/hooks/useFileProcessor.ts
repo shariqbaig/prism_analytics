@@ -1,13 +1,6 @@
 import { useCallback, useEffect, useRef, useMemo } from 'react';
 import { FileProcessorService } from '@/services/fileProcessorService';
-import useFileProcessingStore, { 
-  selectIsProcessing, 
-  selectCurrentProgress, 
-  selectProcessedData,
-  selectHasErrors,
-  selectHasData,
-  selectDetectedDataSources 
-} from '@/stores/fileProcessingStore';
+import useFileProcessingStore from '@/stores/fileProcessingStore';
 import type { FileProcessingConfig, ProcessingResult, ProcessingProgress } from '@/types/fileProcessing';
 
 interface UseFileProcessorOptions {

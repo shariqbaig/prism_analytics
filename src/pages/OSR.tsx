@@ -6,14 +6,6 @@ import { DashboardCard } from '@/components/dashboard';
 const OSR: React.FC = () => {
   const { metrics, loading, error } = useOSRMetrics();
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(value);
-  };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {

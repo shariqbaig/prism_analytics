@@ -64,3 +64,10 @@ export type {
   DataExportOptions,
   MigrationStep
 } from './database';
+
+// Logging and environment types
+export type {
+  Logger,
+  LoggingConfig,
+  LoggerOptions
+} from './logger';

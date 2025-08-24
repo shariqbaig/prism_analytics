@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Logging Configuration Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .demo-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        .environment-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .note {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <h1>Console Logging Configuration Demo</h1>
+    
+    <div class="environment-info">
+        <h3>Current Environment</h3>
+        <p>This demo simulates the logging behavior in development vs production.</p>
+        <p><strong>Mode:</strong> <span id="current-mode">Development</span></p>
+        <p><strong>Production Mode:</strong> <span id="prod-status">false</span></p>
+    </div>
+
+    <div class="demo-section">
+        <h3>Test Console Methods</h3>
+        <p>Click these buttons to test different console methods:</p>
+        
+        <button class="test-button" onclick="testConsoleLog()">Test console.log</button>
+        <button class="test-button" onclick="testConsoleWarn()">Test console.warn</button>
+        <button class="test-button" onclick="testConsoleError()">Test console.error</button>
+        <button class="test-button" onclick="testConsoleInfo()">Test console.info</button>
+        <button class="test-button" onclick="testConsoleDebug()">Test console.debug</button>
+        
+        <br><br>
+        <button class="test-button" onclick="toggleProductionMode()">Toggle Production Mode</button>
+    </div>
+
+    <div class="demo-section">
+        <h3>Logger Utility Test</h3>
+        <p>Test the custom logger utility:</p>
+        
+        <button class="test-button" onclick="testLoggerMethods()">Test Logger Methods</button>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> Open your browser's Developer Tools (F12) and check the Console tab to see the output.
+        In production mode, most console methods will be disabled except for errors.
+    </div>
+
+    <script>
+        // Simulate the logging configuration from the project
+        let isProductionMode = false;
+        
+        // Original console methods
+        const originalConsole = {
+            log: console.log,
+            warn: console.warn,
+            error: console.error,
+            info: console.info,
+            debug: console.debug
+        };
+
+        // Logger utility (simplified version)
+        const logger = {
+            log: (...args) => isProductionMode ? () => {} : originalConsole.log(...args),
+            warn: (...args) => isProductionMode ? () => {} : originalConsole.warn(...args),
+            error: (...args) => originalConsole.error(...args), // Always preserve errors
+            info: (...args) => isProductionMode ? () => {} : originalConsole.info(...args),
+            debug: (...args) => isProductionMode ? () => {} : originalConsole.debug(...args)
+        };
+
+        function configureConsole() {
+            if (isProductionMode) {
+                const noop = () => {};
+                const originalError = console.error;
+                
+                window.console = {
+                    ...console,
+                    log: noop,
+                    warn: noop,
+                    error: originalError, // Preserve error logging
+                    info: noop,
+                    debug: noop
+                };
+            } else {
+                // Restore original console in development
+                window.console = {
+                    ...console,
+                    log: originalConsole.log,
+                    warn: originalConsole.warn,
+                    error: originalConsole.error,
+                    info: originalConsole.info,
+                    debug: originalConsole.debug
+                };
+            }
+        }
+
+        function updateEnvironmentDisplay() {
+            document.getElementById('current-mode').textContent = isProductionMode ? 'Production' : 'Development';
+            document.getElementById('prod-status').textContent = isProductionMode.toString();
+        }
+
+        function testConsoleLog() {
+            console.log('Testing console.log - should be visible in development, hidden in production');
+        }
+
+        function testConsoleWarn() {
+            console.warn('Testing console.warn - should be visible in development, hidden in production');
+        }
+
+        function testConsoleError() {
+            console.error('Testing console.error - should ALWAYS be visible');
+        }
+
+        function testConsoleInfo() {
+            console.info('Testing console.info - should be visible in development, hidden in production');
+        }
+
+        function testConsoleDebug() {
+            console.debug('Testing console.debug - should be visible in development, hidden in production');
+        }
+
+        function testLoggerMethods() {
+            logger.log('Logger.log test - environment aware');
+            logger.warn('Logger.warn test - environment aware');
+            logger.error('Logger.error test - always visible');
+            logger.info('Logger.info test - environment aware');
+            logger.debug('Logger.debug test - environment aware');
+        }
+
+        function toggleProductionMode() {
+            isProductionMode = !isProductionMode;
+            configureConsole();
+            updateEnvironmentDisplay();
+            
+            console.log('Environment switched to:', isProductionMode ? 'Production' : 'Development');
+        }
+
+        // Initialize
+        updateEnvironmentDisplay();
+        
+        // Initial test
+        console.log('Console Logging Demo initialized in development mode');
+        console.log('Instructions:');
+        console.log('1. Open Developer Tools (F12) to see console output');
+        console.log('2. Test different console methods');
+        console.log('3. Toggle to production mode and test again');
+        console.log('4. Notice that errors are always preserved');
+    </script>
+</body>
+</html>

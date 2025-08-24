@@ -9,7 +9,8 @@ import type {
   ProcessedSheet,
   SheetConfig,
   ColumnConfig,
-  ValidationRule
+  ValidationRule,
+  FileProcessingConfig
 } from '@/types/fileProcessing';
 
 // Inline getColumnConfigByName to avoid import issues
@@ -138,7 +139,7 @@ async function processFile(file: File, options: WorkerProcessorOptions): Promise
 
 // Use FileReaderSync for synchronous file reading in worker
 function readFileSync(file: File): ArrayBuffer {
-  const reader = new FileReaderSync();
+  const reader = new (self as any).FileReaderSync();
   return reader.readAsArrayBuffer(file);
 }
 
@@ -151,7 +152,7 @@ function validateWorkbookStructure(workbook: XLSX.WorkBook, config: FileProcessi
     for (const sheetConfig of config.requiredSheets) {
       const foundSheet = availableSheets.find(sheetName => 
         sheetConfig.name.toLowerCase() === sheetName.toLowerCase() ||
-        sheetConfig.aliases.some(alias => alias.toLowerCase() === sheetName.toLowerCase())
+        sheetConfig.aliases.some((alias: string) => alias.toLowerCase() === sheetName.toLowerCase())
       );
 
       if (foundSheet) {
@@ -197,7 +198,7 @@ async function processSheets(workbook: XLSX.WorkBook, options: WorkerProcessorOp
     for (const sheetConfig of options.config.requiredSheets) {
       const actualSheetName = availableSheets.find(sheetName => 
         sheetConfig.name.toLowerCase() === sheetName.toLowerCase() ||
-        sheetConfig.aliases.some(alias => alias.toLowerCase() === sheetName.toLowerCase())
+        sheetConfig.aliases.some((alias: string) => alias.toLowerCase() === sheetName.toLowerCase())
       );
 
       if (!actualSheetName) {

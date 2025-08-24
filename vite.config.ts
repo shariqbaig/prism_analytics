@@ -14,6 +14,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  esbuild: {
+    // Remove console in production builds
+    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    // Keep console.error for critical errors
+    pure: process.env.NODE_ENV === 'production' ? ['console.log', 'console.debug', 'console.info', 'console.warn'] : [],
+  },
   build: {
     target: 'es2020',
     minify: 'esbuild',

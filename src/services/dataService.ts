@@ -247,7 +247,7 @@ export class DataService {
         if (!initialized) throw new Error('Database not initialized');
       }
 
-      await db.setPreference(key, value);
+      await db.setPreference(key, value as string | number | boolean | Record<string, unknown>);
     } catch (error) {
       console.error('Failed to set user preference:', error);
     }
