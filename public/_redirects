@@ -1,0 +1,5 @@
+# Netlify redirects file for SPA routing
+# This file serves as a backup to the netlify.toml redirects configuration
+
+# Redirect all routes to index.html for client-side routing (SPA)
+/*    /index.html   200

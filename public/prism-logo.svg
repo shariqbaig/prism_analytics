@@ -1,0 +1,29 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Executive Blue Background -->
+  <rect width="28" height="28" rx="4" fill="#1e3a8a"/>
+  
+  <!-- PRISM Crystal Shape -->
+  <path d="M14 5L20 11L14 17L8 11L14 5Z" fill="#ffffff" fill-opacity="0.95"/>
+  
+  <!-- Inner Crystal Facets -->
+  <path d="M14 5L17 8L14 11L11 8L14 5Z" fill="#60a5fa" fill-opacity="0.3"/>
+  <path d="M14 11L17 14L14 17L11 14L14 11Z" fill="#3b82f6" fill-opacity="0.2"/>
+  
+  <!-- Analytics Data Visualization -->
+  <g opacity="0.8">
+    <path d="M4 19L6 17L8 19L10 17L12 19" stroke="#60a5fa" stroke-width="1" stroke-linecap="round"/>
+    <path d="M16 19L18 17L20 19L22 17L24 19" stroke="#60a5fa" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="6" cy="21" r="0.8" fill="#60a5fa"/>
+    <circle cx="14" cy="22" r="0.8" fill="#60a5fa"/>
+    <circle cx="22" cy="21" r="0.8" fill="#60a5fa"/>
+  </g>
+  
+  <!-- Elegant Gradient Overlay -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="28" height="28" rx="4" fill="url(#logoGradient)"/>
+</svg>
