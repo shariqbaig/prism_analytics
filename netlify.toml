@@ -2,7 +2,7 @@
 # Executive inventory dashboard with React + TypeScript + Vite
 
 [build]
-  command = "npm ci --include=dev && npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
   base = "./"
 
@@ -32,7 +32,7 @@
 
 # Production environment settings
 [context.production]
-  command = "npm ci --include=dev && npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
   
 [context.production.environment]
@@ -41,7 +41,7 @@
 
 # Deploy Preview settings
 [context.deploy-preview]
-  command = "npm ci --include=dev && npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 
 [context.deploy-preview.environment]
@@ -50,7 +50,7 @@
 
 # Branch deploys
 [context.branch-deploy]
-  command = "npm ci --include=dev && npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 
 [context.branch-deploy.environment]
