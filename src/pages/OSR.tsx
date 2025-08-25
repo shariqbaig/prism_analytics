@@ -19,8 +19,8 @@ const OSR: React.FC = () => {
 
   const getRiskTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'improving': return '↗️';
-      case 'degrading': return '↘️';
+      case 'improving': return '↗';
+      case 'degrading': return '↘';
       case 'stable': return '→';
       default: return '—';
     }

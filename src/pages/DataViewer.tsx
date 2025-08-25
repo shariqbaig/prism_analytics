@@ -2,6 +2,13 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Search, Database, Filter, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 import { FileTypeSelector, type FileType } from '@/components/FileTypeSelector';
 import { useDataStorage } from '@/hooks/useDataStorage';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import type { ProcessedSheet } from '@/types/fileProcessing';
 
 interface PaginationInfo {
@@ -189,11 +196,6 @@ const DataViewer: React.FC = () => {
     setCurrentPage(page);
   };
 
-  // Handle records per page change
-  const handleRecordsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRecordsPerPage(parseInt(e.target.value));
-    setCurrentPage(1);
-  };
 
   // Get table columns
   const columns = currentSheetData?.columns || [];
@@ -214,9 +216,9 @@ const DataViewer: React.FC = () => {
       {availableFileTypes.length > 0 && selectedFileType && (
         <div className="mb-6 space-y-4">
           {/* File Type and Sheet Selection */}
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start md:items-end">
             {availableFileTypes.length > 1 ? (
-              <div className="flex-1">
+              <div className="md:w-48 w-full">
                 <FileTypeSelector
                   value={selectedFileType}
                   onChange={handleFileTypeChange}
@@ -224,7 +226,7 @@ const DataViewer: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="flex-1">
+              <div className="md:w-48 w-full">
                 <label className="block text-sm font-medium mb-2">File Type</label>
                 <div className="px-3 py-2 border border-input rounded-md bg-background">
                   {selectedFileType === 'inventory' ? 'Inventory' : 'OSR'}
@@ -232,21 +234,24 @@ const DataViewer: React.FC = () => {
               </div>
             )}
             
-            <div className="flex-1">
+            <div className="md:w-60 w-full">
               <label className="block text-sm font-medium mb-2">Sheet</label>
-              <select
+              <Select
                 value={selectedSheet}
-                onChange={(e) => handleSheetChange(e.target.value)}
+                onValueChange={handleSheetChange}
                 disabled={isLoading || availableSheets.length === 0}
-                className="w-full px-3 py-2 border border-input rounded-md bg-background disabled:opacity-50"
               >
-                <option value="">Select a sheet...</option>
-                {availableSheets.map((sheet) => (
-                  <option key={sheet.name} value={sheet.name}>
-                    {sheet.name} ({sheet.rowCount} rows, {sheet.columnCount} columns)
-                  </option>
-                ))}
-              </select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select a sheet..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {availableSheets.map((sheet) => (
+                    <SelectItem key={sheet.name} value={sheet.name}>
+                      {sheet.name} ({sheet.rowCount} rows, {sheet.columnCount} columns)
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -269,16 +274,23 @@ const DataViewer: React.FC = () => {
             
             <div>
               <label className="block text-sm font-medium mb-2">Records per page</label>
-              <select
-                value={recordsPerPage}
-                onChange={handleRecordsPerPageChange}
-                className="px-3 py-2 border border-input rounded-md bg-background"
+              <Select
+                value={recordsPerPage.toString()}
+                onValueChange={(value) => {
+                  setRecordsPerPage(parseInt(value));
+                  setCurrentPage(1);
+                }}
               >
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-              </select>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="15">15</SelectItem>
+                  <SelectItem value="25">25</SelectItem>
+                  <SelectItem value="50">50</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         )}

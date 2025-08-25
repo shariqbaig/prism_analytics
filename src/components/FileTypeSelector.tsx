@@ -23,8 +23,8 @@ export const FileTypeSelector: React.FC<FileTypeSelectorProps> = ({
   };
 
   return (
-    <div className={`space-y-2 ${className}`}>
-      <label className="text-sm font-medium text-gray-700">
+    <div className={className}>
+      <label className="block text-sm font-medium mb-2">
         File Type
       </label>
       <Select

@@ -41,11 +41,6 @@ const navigation = [
     href: '/reports',
     icon: FileText,
   },
-  {
-    name: 'Component Demo',
-    href: '/demo',
-    icon: BarChart3,
-  },
 ];
 
 interface SidebarProps {
@@ -68,16 +63,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
                 to={item.href}
                 className={({ isActive }) =>
                   cn(
-                    'flex items-center rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors relative group',
+                    'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 relative group',
                     isActive 
-                      ? 'bg-accent text-accent-foreground' 
-                      : 'text-muted-foreground'
+                      ? 'bg-primary/10 text-primary border-l-2 border-primary font-semibold shadow-sm' 
+                      : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground hover:shadow-sm'
                   )
                 }
                 title={isCollapsed ? item.name : undefined}
               >
                 <item.icon className={cn(
-                  "h-4 w-4 flex-shrink-0",
+                  "h-4 w-4 flex-shrink-0 transition-colors",
                   isCollapsed ? "" : "mr-3"
                 )} />
                 {!isCollapsed && (

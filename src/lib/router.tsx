@@ -105,9 +105,7 @@ export const router = createBrowserRouter([
         path: 'inventory',
         element: (
           <Suspense fallback={<LoadingSpinner />}>
-            <DataGuard requiredData={['inventory']}>
-              <Inventory />
-            </DataGuard>
+            <Inventory />
           </Suspense>
         )
       },
@@ -115,9 +113,7 @@ export const router = createBrowserRouter([
         path: 'osr',
         element: (
           <Suspense fallback={<LoadingSpinner />}>
-            <DataGuard requiredData={['osr']}>
-              <OSR />
-            </DataGuard>
+            <OSR />
           </Suspense>
         )
       },
