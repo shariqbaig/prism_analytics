@@ -3,120 +3,153 @@
 @source "../index.html";
 @source "../src/**/*.{html,js,ts,jsx,tsx}";
 
-@theme {
-  --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(214 86% 26%);
-  --color-background: hsl(0 0% 100%);
-  --color-foreground: hsl(222.2 84% 4.9%);
-  
-  --color-primary: hsl(214 86% 26%);
-  --color-primary-foreground: hsl(210 40% 98%);
-  
-  --color-secondary: hsl(210 40% 96%);
-  --color-secondary-foreground: hsl(222.2 84% 4.9%);
-  
-  --color-destructive: hsl(358 75% 59%);
-  --color-destructive-foreground: hsl(210 40% 98%);
-  
-  --color-muted: hsl(210 40% 96%);
-  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
-  
-  --color-accent: hsl(210 40% 96%);
-  --color-accent-foreground: hsl(222.2 84% 4.9%);
-  
-  --color-popover: hsl(0 0% 100%);
-  --color-popover-foreground: hsl(222.2 84% 4.9%);
-  
-  --color-card: hsl(0 0% 100%);
-  --color-card-foreground: hsl(222.2 84% 4.9%);
-  
-  --radius: 0.5rem;
-}
-
 @layer base {
+  /* 
+   * PRISM Analytics Design System
+   * Using OKLCH color space for better color perception and manipulation
+   * Executive dashboard optimized color palette
+   */
   :root {
-    /* Executive Color Palette */
-    --primary: 214 86% 26%;        /* Navy Blue #1e3a8a - Trust, stability */
-    --primary-foreground: 210 40% 98%;
+    /* Core Border Radius */
+    --radius: 0.625rem;
     
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    /* Core Semantic Colors - Light Theme */
+    --background: 1 0 0;                    /* Pure white */
+    --foreground: 0.13 0.028 261.692;       /* Deep navy text */
+    --card: 1 0 0;                          /* White cards */
+    --card-foreground: 0.13 0.028 261.692;
+    --popover: 1 0 0;
+    --popover-foreground: 0.13 0.028 261.692;
     
-    /* Health-Coded Status Colors */
-    --success: 142 71% 45%;         /* Emerald #10b981 - Healthy inventory */
-    --success-foreground: 210 40% 98%;
+    /* Primary Colors - Executive Navy Palette */
+    --primary: 0.21 0.034 264.665;          /* Professional navy blue */
+    --primary-foreground: 0.985 0.002 247.839;
     
-    --warning: 43 96% 56%;          /* Amber #f59e0b - Attention needed */
-    --warning-foreground: 222.2 84% 4.9%;
+    /* Secondary Colors - Subtle Gray Palette */
+    --secondary: 0.967 0.003 264.542;       /* Light gray */
+    --secondary-foreground: 0.21 0.034 264.665;
     
-    --destructive: 358 75% 59%;     /* Rose #f43f5e - Critical issues */
-    --destructive-foreground: 210 40% 98%;
+    /* Functional Colors */
+    --muted: 0.967 0.003 264.542;
+    --muted-foreground: 0.551 0.027 264.364;
+    --accent: 0.967 0.003 264.542;
+    --accent-foreground: 0.21 0.034 264.665;
+    --destructive: 0.577 0.245 27.325;      /* Professional red */
+    --destructive-foreground: 0.985 0.002 247.839;
     
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Executive Status Colors */
+    --success: 0.646 0.222 142.086;         /* Professional green */
+    --success-foreground: 0.985 0.002 247.839;
+    --warning: 0.84 0.16 84;                /* Professional amber */
+    --warning-foreground: 0.28 0.07 46;
+    --neutral: 0.7 0.015 264.5;             /* Neutral gray */
+    --neutral-foreground: 0.985 0.002 247.839;
     
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Interaction Colors */
+    --border: 0.928 0.006 264.531;
+    --input: 0.928 0.006 264.531;
+    --ring: 0.707 0.022 261.325;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Chart Colors - Data Visualization */
+    --chart-1: 0.646 0.222 41.116;         /* Warm orange */
+    --chart-2: 0.6 0.118 184.704;          /* Ocean blue */
+    --chart-3: 0.398 0.07 227.392;         /* Deep purple */
+    --chart-4: 0.828 0.189 84.429;         /* Bright green */
+    --chart-5: 0.769 0.188 70.08;          /* Golden yellow */
     
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Sidebar Component Colors */
+    --sidebar: 0.985 0.002 247.839;
+    --sidebar-foreground: 0.13 0.028 261.692;
+    --sidebar-primary: 0.21 0.034 264.665;
+    --sidebar-primary-foreground: 0.985 0.002 247.839;
+    --sidebar-accent: 0.967 0.003 264.542;
+    --sidebar-accent-foreground: 0.21 0.034 264.665;
+    --sidebar-border: 0.928 0.006 264.531;
+    --sidebar-ring: 0.707 0.022 261.325;
     
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    /* Typography Scale */
+    --font-family-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-family-heading: "Inter", system-ui, sans-serif;
+    --font-family-mono: "JetBrains Mono", "Fira Code", Menlo, monospace;
     
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 214 86% 26%;
-    
-    --radius: 0.5rem;
+    --font-size-display-2xl: 4.5rem;       /* 72px - Hero displays */
+    --line-height-display-2xl: 1.1;
+    --font-size-display-xl: 3.75rem;       /* 60px - Large displays */
+    --line-height-display-xl: 1.1;
+    --font-size-display-lg: 3rem;          /* 48px - Medium displays */
+    --line-height-display-lg: 1.15;
+    --font-size-display-md: 2.25rem;       /* 36px - KPI values */
+    --line-height-display-md: 1.2;
+    --font-size-display-sm: 1.875rem;      /* 30px - Section headers */
+    --line-height-display-sm: 1.25;
     
     /* Executive Dashboard Spacing */
+    --spacing-18: 4.5rem;                  /* 72px */
+    --spacing-22: 5.5rem;                  /* 88px */
+    --spacing-26: 6.5rem;                  /* 104px */
+    --spacing-30: 7.5rem;                  /* 120px */
+    
+    /* Component-Specific Variables */
+    --kpi-card-min-height: 120px;          /* Executive readability standard */
+    --executive-summary-min-height: 200px;
     --dashboard-padding: 1.5rem;
     --card-padding: 1.25rem;
-    --kpi-card-min-height: 7.5rem;    /* 120px for executive readability */
     
-    /* Professional Typography Scale */
-    --font-size-kpi: 2.25rem;         /* 36px for KPI values */
-    --font-size-heading: 1.5rem;      /* 24px for section headings */
-    --font-size-body: 0.875rem;       /* 14px for body text */
-    --font-size-caption: 0.75rem;     /* 12px for chart labels */
-    
-    /* Chart & Animation Variables */
+    /* Animation and Transitions */
     --chart-animation-duration: 800ms;
     --transition-fast: 150ms;
     --transition-normal: 300ms;
     --transition-slow: 500ms;
   }
   
+  /* Dark Theme */
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0.13 0.028 261.692;
+    --foreground: 0.985 0.002 247.839;
+    --card: 0.21 0.034 264.665;
+    --card-foreground: 0.985 0.002 247.839;
+    --popover: 0.21 0.034 264.665;
+    --popover-foreground: 0.985 0.002 247.839;
     
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --primary: 0.928 0.006 264.531;
+    --primary-foreground: 0.21 0.034 264.665;
+    --secondary: 0.278 0.033 256.848;
+    --secondary-foreground: 0.985 0.002 247.839;
     
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --muted: 0.278 0.033 256.848;
+    --muted-foreground: 0.707 0.022 261.325;
+    --accent: 0.278 0.033 256.848;
+    --accent-foreground: 0.985 0.002 247.839;
+    --destructive: 0.704 0.191 22.216;
     
-    --primary: 214 86% 26%;
-    --primary-foreground: 210 40% 98%;
+    /* Executive Status Colors - Dark Mode */
+    --success: 0.488 0.243 142.086;
+    --success-foreground: 0.985 0.002 247.839;
+    --warning: 0.41 0.11 46;
+    --warning-foreground: 0.99 0.02 95;
+    --neutral: 0.551 0.027 264.364;
+    --neutral-foreground: 0.985 0.002 247.839;
     
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.551 0.027 264.364;
     
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Chart Colors - Dark Mode Adjusted */
+    --chart-1: 0.488 0.243 264.376;
+    --chart-2: 0.696 0.17 162.48;
+    --chart-3: 0.769 0.188 70.08;
+    --chart-4: 0.627 0.265 303.9;
+    --chart-5: 0.645 0.246 16.439;
     
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Sidebar - Dark Mode */
+    --sidebar: 0.21 0.034 264.665;
+    --sidebar-foreground: 0.985 0.002 247.839;
+    --sidebar-primary: 0.488 0.243 264.376;
+    --sidebar-primary-foreground: 0.985 0.002 247.839;
+    --sidebar-accent: 0.278 0.033 256.848;
+    --sidebar-accent-foreground: 0.985 0.002 247.839;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.551 0.027 264.364;
   }
 }
 
@@ -128,36 +161,46 @@
   }
   
   .kpi-card {
-    @apply bg-card rounded-lg border shadow-sm;
+    @apply rounded-lg border shadow-sm;
+    background: oklch(var(--card));
+    color: oklch(var(--card-foreground));
     min-height: var(--kpi-card-min-height);
     padding: var(--card-padding);
   }
   
   .kpi-value {
-    @apply font-bold text-primary;
+    @apply font-bold;
+    color: oklch(var(--primary));
     font-size: var(--font-size-kpi);
     line-height: 1.2;
   }
   
   .status-healthy {
-    @apply text-green-600 bg-green-50 border-green-200;
+    color: oklch(var(--success));
+    background: oklch(var(--success) / 0.1);
+    border-color: oklch(var(--success) / 0.3);
   }
   
   .status-warning {
-    @apply text-amber-600 bg-amber-50 border-amber-200;
+    color: oklch(var(--warning));
+    background: oklch(var(--warning) / 0.1);
+    border-color: oklch(var(--warning) / 0.3);
   }
   
   .status-critical {
-    @apply text-rose-600 bg-rose-50 border-rose-200;
+    color: oklch(var(--destructive));
+    background: oklch(var(--destructive) / 0.1);
+    border-color: oklch(var(--destructive) / 0.3);
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: oklch(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
+    background: oklch(var(--background));
+    color: oklch(var(--foreground));
     margin: 0;
     font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;

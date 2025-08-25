@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown, Minus, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
 
@@ -20,35 +21,35 @@ export interface KPICardProps {
 const statusConfig = {
   success: {
     borderColor: 'border-green-200',
-    backgroundColor: 'bg-green-50',
+    backgroundColor: 'bg-green-50/30',
     textColor: 'text-green-800',
     iconColor: 'text-green-600',
     icon: CheckCircle
   },
   warning: {
     borderColor: 'border-yellow-200',
-    backgroundColor: 'bg-yellow-50',
+    backgroundColor: 'bg-yellow-50/30',
     textColor: 'text-yellow-800',
     iconColor: 'text-yellow-600',
     icon: AlertTriangle
   },
   error: {
     borderColor: 'border-red-200',
-    backgroundColor: 'bg-red-50',
+    backgroundColor: 'bg-red-50/30',
     textColor: 'text-red-800',
     iconColor: 'text-red-600',
     icon: AlertTriangle
   },
   neutral: {
-    borderColor: 'border-gray-200',
-    backgroundColor: 'bg-gray-50',
-    textColor: 'text-gray-800',
-    iconColor: 'text-gray-600',
+    borderColor: 'border-border',
+    backgroundColor: 'bg-muted/30',
+    textColor: 'text-foreground',
+    iconColor: 'text-muted-foreground',
     icon: Minus
   },
   loading: {
     borderColor: 'border-blue-200',
-    backgroundColor: 'bg-blue-50',
+    backgroundColor: 'bg-blue-50/30',
     textColor: 'text-blue-800',
     iconColor: 'text-blue-600',
     icon: Clock
@@ -96,21 +97,16 @@ export const KPICard: React.FC<KPICardProps> = ({
             <CardTitle className="text-sm font-medium text-muted-foreground">
               {title}
             </CardTitle>
-            <div className="animate-pulse">
-              <div className="w-5 h-5 bg-gray-300 rounded"></div>
-            </div>
+            <Skeleton className="w-5 h-5 rounded-full" />
           </div>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 rounded w-20"></div>
+            <div className="flex items-baseline justify-between">
+              <Skeleton className="h-8 w-20" />
+              {trend && <Skeleton className="h-6 w-12 rounded-full" />}
             </div>
-            {description && (
-              <div className="animate-pulse">
-                <div className="h-4 bg-gray-300 rounded w-32"></div>
-              </div>
-            )}
+            {description && <Skeleton className="h-4 w-32" />}
           </div>
         </CardContent>
       </Card>

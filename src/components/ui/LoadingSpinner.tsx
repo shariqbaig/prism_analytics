@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { Loader2 } from 'lucide-react';
 
 interface LoadingSpinnerProps {
   className?: string;
@@ -18,9 +19,9 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   return (
     <div className={cn('flex items-center justify-center p-8', className)}>
-      <div
+      <Loader2
         className={cn(
-          'animate-spin rounded-full border-2 border-primary border-t-transparent',
+          'animate-spin text-primary',
           sizeClasses[size]
         )}
       />

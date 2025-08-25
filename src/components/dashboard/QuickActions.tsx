@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 interface QuickAction {
@@ -34,12 +35,8 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
     return (
       <Card className={cn('w-full', className)}>
         <CardHeader>
-          <div className="animate-pulse space-y-2">
-            <div className="h-6 bg-gray-300 rounded w-32"></div>
-            {description && (
-              <div className="h-4 bg-gray-300 rounded w-48"></div>
-            )}
-          </div>
+          <Skeleton className="h-6 w-32" />
+          {description && <Skeleton className="h-4 w-48" />}
         </CardHeader>
         <CardContent>
           <div className={cn(
@@ -47,9 +44,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({
             layout === 'grid' && 'grid grid-cols-1 md:grid-cols-2 gap-3 space-y-0'
           )}>
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="h-10 bg-gray-300 rounded"></div>
-              </div>
+              <Skeleton key={i} className="h-12 w-full" />
             ))}
           </div>
         </CardContent>

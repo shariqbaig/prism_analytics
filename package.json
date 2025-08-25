@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:analyze": "npm run build && open dist/bundle-analysis.html",
+    "build:stats": "npm run build && du -sh dist/* | sort -h",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "perf:test": "npm run build && npm run preview"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -50,10 +53,12 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
     "postcss": "^8.5.6",
+    "rollup-plugin-visualizer": "^6.0.3",
     "tailwindcss": "^4.1.12",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vite-bundle-analyzer": "^1.2.1"
   }
 }

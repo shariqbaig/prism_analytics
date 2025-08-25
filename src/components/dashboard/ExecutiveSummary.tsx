@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { TrendingUp, TrendingDown, AlertTriangle, CheckCircle } from 'lucide-react';
 
@@ -25,19 +26,19 @@ const statusConfig = {
   good: {
     icon: CheckCircle,
     color: 'text-green-600',
-    backgroundColor: 'bg-green-50',
+    backgroundColor: 'bg-green-50/50',
     borderColor: 'border-l-green-500'
   },
   warning: {
     icon: AlertTriangle,
     color: 'text-yellow-600',
-    backgroundColor: 'bg-yellow-50',
+    backgroundColor: 'bg-yellow-50/50',
     borderColor: 'border-l-yellow-500'
   },
   critical: {
     icon: AlertTriangle,
     color: 'text-red-600',
-    backgroundColor: 'bg-red-50',
+    backgroundColor: 'bg-red-50/50',
     borderColor: 'border-l-red-500'
   }
 };
@@ -52,18 +53,20 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
     return (
       <Card className={cn('w-full', className)}>
         <CardHeader>
-          <div className="animate-pulse">
-            <div className="h-6 bg-gray-300 rounded w-48"></div>
-          </div>
+          <Skeleton className="h-6 w-48" />
+          <Skeleton className="h-4 w-64" />
         </CardHeader>
         <CardContent className="space-y-4">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="animate-pulse border-l-4 border-gray-300 bg-gray-50 p-4 rounded-r">
+            <div key={i} className="border-l-4 border-muted bg-muted/30 p-4 rounded-r">
               <div className="flex justify-between items-start mb-2">
-                <div className="h-4 bg-gray-300 rounded w-32"></div>
-                <div className="h-6 bg-gray-300 rounded w-16"></div>
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-4 w-4 rounded-full" />
+                  <Skeleton className="h-4 w-32" />
+                </div>
+                <Skeleton className="h-6 w-16 rounded-full" />
               </div>
-              <div className="h-4 bg-gray-300 rounded w-20"></div>
+              <Skeleton className="h-6 w-20" />
             </div>
           ))}
         </CardContent>
