@@ -180,7 +180,7 @@ export class PrismDatabase extends Dexie {
       const allFiles = await this.fileMetadata.toArray();
       console.log('[DATABASE] All files in database:', allFiles);
       
-      const query = this.fileMetadata.where('isActive').equals(1);
+      const query = this.fileMetadata.where('isActive').equals(true as any);
       
       if (fileType) {
         const result = await query.and(file => file.fileType === fileType).first();
